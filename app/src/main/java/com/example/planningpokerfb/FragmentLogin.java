@@ -28,7 +28,10 @@ public class FragmentLogin extends Fragment {
     Button btn_login;
     TextView tv_reg;
     FirebaseAuth mFirebaseAuth;
+
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    String adminEmail = "admin@admin.com";
+    String adminPwd = "admin";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,7 +50,7 @@ public class FragmentLogin extends Fragment {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = et_email.getText().toString();
+                final String email = et_email.getText().toString();
                 String pwd = et_pwd.getText().toString();
                 if (email.isEmpty()) {
                     et_email.setError("Please enter e-mail!");
@@ -64,12 +67,22 @@ public class FragmentLogin extends Fragment {
                             if (!task.isSuccessful()) {
                                 Toast.makeText(getActivity(), "Login Error, Please Login Again", Toast.LENGTH_SHORT).show();
                             } else {
-                                Fragment fragment = new FragmentUser();
-                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.frame_id, fragment);
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
+                                if(et_email.equals(adminEmail)&& et_pwd.equals(adminPwd)){
+                                    Fragment fragment = new FragmentAdmin();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.frame_id, fragment);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+                                }
+                                else {
+                                    Fragment fragment = new FragmentUser();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.frame_id, fragment);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+                                }
                             }
                         }
                     });

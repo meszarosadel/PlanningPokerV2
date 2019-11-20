@@ -25,9 +25,10 @@ public class FragmentLogin extends Fragment {
 
     EditText et_email;
     EditText et_pwd;
-    Button button;
+    Button btn_login;
     TextView tv_reg;
     FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,13 +38,13 @@ public class FragmentLogin extends Fragment {
         // Inflate the layout for this fragment
         et_email = v.findViewById(R.id.et_email);
         et_pwd = v.findViewById(R.id.et_pwd);
-        button = v.findViewById(R.id.button);
+        btn_login = v.findViewById(R.id.btn_login);
         tv_reg = v.findViewById(R.id.tv_reg);
 
         final Context context = getActivity();
 
 
-        button.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = et_email.getText().toString();
@@ -91,6 +92,11 @@ public class FragmentLogin extends Fragment {
 
         return v;
 
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
 }

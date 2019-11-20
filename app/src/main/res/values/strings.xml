@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PlanningPokerFB</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="login">Login</string>
+    <string name="userEmail">E-mail</string>
+    <string name="pwd">Password</string>
+    <string name="login_btn">Login</string>
+    <string name="vote">Please vote!</string>
+    <string name="task">Tasks</string>
+    <string name="score">Scores</string>
+    <string name="vote_btn">Submit</string>
+    <string name="result">Results</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

@@ -1,6 +1,7 @@
 package com.example.planningpokerfb;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +20,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+
 public class FragmentLogin extends Fragment {
 
+    public static final String TAG = FragmentLogin.class.getSimpleName();
 
     EditText et_email;
     EditText et_pwd;
     Button btn_login;
     TextView tv_reg;
     FirebaseAuth mFirebaseAuth;
-    public FirebaseAuth.AuthStateListener mAuthStateListener;
+    public FirebaseAuth.AuthStateListener mAuthStateListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            Log.d(TAG, "onAuthStateChanged");
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,5 +108,6 @@ public class FragmentLogin extends Fragment {
         super.onStart();
         mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
+
 
 }

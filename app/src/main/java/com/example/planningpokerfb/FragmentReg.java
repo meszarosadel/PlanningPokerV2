@@ -40,8 +40,6 @@ public class FragmentReg extends Fragment {
         btn_reg = v.findViewById(R.id.btn_login);
         tv_sign = v.findViewById(R.id.tv_reg);
 
-        final Context context = getActivity();
-
         btn_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,14 +67,7 @@ public class FragmentReg extends Fragment {
                         }
                     });
                 }
-                else{
-                    Fragment fragment = new FragmentUser();
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.frame_id, fragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-                }
+
             }
         });
 

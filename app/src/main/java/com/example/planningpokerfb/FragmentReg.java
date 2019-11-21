@@ -28,10 +28,12 @@ public class FragmentReg extends Fragment {
     Button btn_reg;
     TextView tv_sign;
     FirebaseAuth mFirebaseAuth;
+    private static final String TAG = FragmentReg.class.getSimpleName();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_fragment_login, container, false);
+        View v = inflater.inflate(R.layout.fragment_fragment_reg, container, false);
         // Inflate the layout for this fragment
         et_email = v.findViewById(R.id.et_email);
         et_pwd = v.findViewById(R.id.et_pwd);
@@ -57,6 +59,7 @@ public class FragmentReg extends Fragment {
                     Toast.makeText(getActivity(),"Fields Are Empty!",Toast.LENGTH_SHORT).show();
                 }
                 else  if(!(email.isEmpty() && pwd.isEmpty())){
+                    mFirebaseAuth = FirebaseAuth.getInstance();
                     mFirebaseAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -91,4 +94,5 @@ public class FragmentReg extends Fragment {
 
         return v;
     }
+
 }

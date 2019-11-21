@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_id, new FragmentLogin());
+        transaction.replace(R.id.frame_id, new FragmentReg());
         transaction.commit();
     }
 }

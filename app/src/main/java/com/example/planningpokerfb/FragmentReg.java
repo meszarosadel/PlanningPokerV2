@@ -14,10 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.planningpokerfb.Models.UserRole;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class FragmentReg extends Fragment {
@@ -28,6 +31,7 @@ public class FragmentReg extends Fragment {
     TextView tv_sign;
     FirebaseAuth mFirebaseAuth;
     private static final String TAG = FragmentReg.class.getSimpleName();
+    private DatabaseReference databaseRole;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +46,7 @@ public class FragmentReg extends Fragment {
         btn_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = et_email.getText().toString();
+                final String email = et_email.getText().toString();
                 String pwd = et_pwd.getText().toString();
                 if(email.isEmpty()){
                     et_email.setError("Please enter email id");
@@ -71,9 +75,17 @@ public class FragmentReg extends Fragment {
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.commit();
                             }
+                            if(task.isSuccessful()){
+                                //Toast.makeText(getActivity(),"Successful SignUp",Toast.LENGTH_SHORT).show();
+                                databaseRole= FirebaseDatabase.getInstance().getReference("UserRoles");
+                                String userRole = "USER";
+                                addUserRole(email,userRole);
+                            }
                         }
                     });
+
                 }
+
 
             }
         });
@@ -91,6 +103,21 @@ public class FragmentReg extends Fragment {
         });
 
         return v;
+    }
+
+    public void addUserRole(String email, String role){
+
+        String id = databaseRole.push().getKey();
+        UserRole userRole = new UserRole(id, email, role);
+        databaseRole.child(id).setValue(userRole).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (!task.isSuccessful()){
+                    Toast.makeText(getActivity(),"BESZURTA", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
 }

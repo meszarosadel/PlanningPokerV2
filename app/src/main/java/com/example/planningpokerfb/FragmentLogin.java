@@ -15,10 +15,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.planningpokerfb.Models.UserRole;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class FragmentLogin extends Fragment {
@@ -30,6 +36,10 @@ public class FragmentLogin extends Fragment {
     Button btn_login;
     TextView tv_reg;
     FirebaseAuth mFirebaseAuth;
+    UserRole userRole = new UserRole();
+    private DatabaseReference databaseReference;
+    private DatabaseReference userRoleDatabaseReference;
+    private FirebaseDatabase userRoleDatabase;
     public FirebaseAuth.AuthStateListener mAuthStateListener = new FirebaseAuth.AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -74,13 +84,37 @@ public class FragmentLogin extends Fragment {
                             if (!task.isSuccessful()) {
                                 Toast.makeText(getActivity(), "Login Error, Please Login Again", Toast.LENGTH_SHORT).show();
                             } else {
-                                Fragment fragment = new FragmentUser();
-                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.frame_id, fragment);
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
-                            }
+                                userRole.role="USER";
+                                userRole.id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                databaseReference= FirebaseDatabase.getInstance().getReference();
+                                userRoleDatabaseReference = databaseReference.child("UserRoles").child(userRole.id);
+                                userRoleDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        userRole = dataSnapshot.getValue(UserRole.class);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                                if(userRole.role == "ADMIN"){
+                                    Fragment fragment = new FragmentUser();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.frame_id, fragment);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+                                }
+                                else{
+                                    Fragment fragment = new FragmentUser();
+                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.frame_id, fragment);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+                            }}
                         }
                     });
                 }

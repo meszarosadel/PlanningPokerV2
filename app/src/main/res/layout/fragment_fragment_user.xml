@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBlue"
     tools:context=".FragmentUser">
 
     <!-- TODO: Update blank fragment layout -->
@@ -12,8 +13,10 @@
         android:id="@+id/groupTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="30dp"
+        android:textSize="50dp"
         android:text="Groups"
+        android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,13 +34,16 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/orange"
+        android:id="@+id/button"
         android:layout_below="@id/groupsRecycleView"
-        android:layout_marginTop="28dp"
         android:layout_toEndOf="@+id/groupsRecycleView"
-        android:text="Connect to other group"
+        android:text="Connect to other groups"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/groupsRecycleView" />

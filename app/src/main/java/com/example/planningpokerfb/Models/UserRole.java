@@ -1,9 +1,12 @@
 package com.example.planningpokerfb.Models;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class UserRole {
-    String id;
-    String email;
-    String role;
+    public String id;
+    public String email;
+    public String role;
 
     public UserRole(){
 

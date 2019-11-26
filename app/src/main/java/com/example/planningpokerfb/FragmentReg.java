@@ -107,16 +107,9 @@ public class FragmentReg extends Fragment {
 
     public void addUserRole(String email, String role){
 
-        String id = databaseRole.push().getKey();
+        String id = mFirebaseAuth.getUid();
         UserRole userRole = new UserRole(id, email, role);
-        databaseRole.child(id).setValue(userRole).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (!task.isSuccessful()){
-                    Toast.makeText(getActivity(),"BESZURTA", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        databaseRole.child(id).setValue(userRole);
 
     }
 

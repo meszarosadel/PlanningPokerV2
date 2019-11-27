@@ -91,12 +91,12 @@ public class FragmentLogin extends Fragment {
         tv_reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new FragmentReg();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_id, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                    Fragment fragment = new FragmentReg();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_id, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
             }
         });
 

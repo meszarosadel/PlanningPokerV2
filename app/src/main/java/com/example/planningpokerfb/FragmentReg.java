@@ -62,6 +62,14 @@ public class FragmentReg extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
                                 Toast.makeText(getActivity(),"SignUp Unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "SignUp Successful!", Toast.LENGTH_SHORT).show();
+                                Fragment fragment = new FragmentUser();
+                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.frame_id, fragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
                             }
                         }
                     });

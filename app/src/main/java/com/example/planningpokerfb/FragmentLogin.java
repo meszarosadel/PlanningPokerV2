@@ -74,6 +74,7 @@ public class FragmentLogin extends Fragment {
                             if (!task.isSuccessful()) {
                                 Toast.makeText(getActivity(), "Login Error, Please Login Again", Toast.LENGTH_SHORT).show();
                             } else {
+                                Toast.makeText(getActivity(), "Login Successful!", Toast.LENGTH_SHORT).show();
                                 Fragment fragment = new FragmentUser();
                                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

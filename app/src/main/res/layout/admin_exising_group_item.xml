@@ -5,8 +5,10 @@
 
     <Button
         android:id="@+id/btn_adm_group"
-        android:layout_width="wrap_content"
+        android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Button" />
+        android:background="@drawable/round_btn"
+        android:text="Button"
+        android:textColor="@color/white" />
 </LinearLayout>

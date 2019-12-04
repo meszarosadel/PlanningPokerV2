@@ -1,5 +1,6 @@
 package com.example.planningpokerfb.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Groups {
@@ -7,6 +8,7 @@ public class Groups {
     private String groupName;
     private boolean active;
     private int timeSpan;
+    private List<String> userIds;
 
    public String getGroupId(){
        return this.groupId;
@@ -27,5 +29,10 @@ public class Groups {
        this.groupName = groupName;
        this.active = active;
        this.timeSpan = timeSpan;
+       this.userIds = new ArrayList<>();
+   }
+
+   public void addUser(String userId){
+       this.userIds.add(userId);
    }
 }

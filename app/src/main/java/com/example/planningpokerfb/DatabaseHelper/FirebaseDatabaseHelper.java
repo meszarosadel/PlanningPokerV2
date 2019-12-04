@@ -1,7 +1,5 @@
 package com.example.planningpokerfb.DatabaseHelper;
 
-import android.widget.LinearLayout;
-
 import androidx.annotation.NonNull;
 
 import com.example.planningpokerfb.Models.UserRole;
@@ -13,7 +11,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FirebaseDatabaseHelper {
     private FirebaseDatabase mDatabase;
@@ -51,5 +48,6 @@ public class FirebaseDatabaseHelper {
             }
         });
     }
+
 
 }

@@ -18,7 +18,9 @@
     <string name="tv_user">Groups</string>
     <string name="tv_group_name">Add a group name</string>
     <string name="tv_add_task">Add a new task</string>
+    <string name="tv_add_group">Add a new group</string>
     <string name="btn_add_task">Add task</string>
+    <string name="btn_add_group">Add group</string>
     <string name="btn_submit">Submit</string>
 
     <!-- TODO: Remove or change this placeholder text -->

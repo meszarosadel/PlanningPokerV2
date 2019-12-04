@@ -3,6 +3,7 @@ package com.example.planningpokerfb;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
@@ -29,7 +30,7 @@ public class FragmentAdmin extends Fragment {
 
     FirebaseDatabaseHelper myDb;
     //vars
-    private ArrayList<Groups> gNames = new ArrayList<>();
+    //private ArrayList<Groups> gNames = new ArrayList<>();
 
     Button btn_add_new_group;
 
@@ -50,7 +51,7 @@ public class FragmentAdmin extends Fragment {
 
 
 
-        btn_add_new_group.setOnClickListener(new View.OnClickListener() {
+        btn_add_new_group.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Fragment fragment = new FragmentAddGroup();
@@ -71,6 +72,7 @@ public class FragmentAdmin extends Fragment {
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
+            ArrayList<Groups> gNames = new ArrayList<>();
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot productSnapshot: dataSnapshot.getChildren()) {

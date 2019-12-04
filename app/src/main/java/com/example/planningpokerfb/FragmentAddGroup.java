@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.planningpokerfb.Models.Groups;
 import com.google.firebase.database.DatabaseReference;
@@ -45,11 +47,12 @@ public class FragmentAddGroup extends Fragment {
                     mDatabase = FirebaseDatabase.getInstance().getReference();
                     Groups group = new Groups(UUID.randomUUID().toString(),groupName,true,20);
                     mDatabase.child("Groups").child(group.getGroupId()).setValue(group);
-
-
-
-                    //DatabaseReference databaseRole= FirebaseDatabase.getInstance().getReference("Groups");
-                    //databaseRole.child(FirebaseAuth.getInstance().getUid()).setValue(group);
+                    Fragment fragment = new FragmentAdmin();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_id, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                 }
 
             }

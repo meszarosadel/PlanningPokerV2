@@ -9,15 +9,20 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.planningpokerfb.FragmentAddNewTask;
+import com.example.planningpokerfb.FragmentAdmin;
+import com.example.planningpokerfb.MainActivity;
 import com.example.planningpokerfb.R;
 
 import java.util.ArrayList;
 
 public class RecyclerViewGroupAdapter extends RecyclerView.Adapter<RecyclerViewGroupAdapter.ViewHolder> {
     private static final String TAG = "RecyclerViewAdapter";
-
     private ArrayList<Groups> mGroup;
     private Context mContext;
 
@@ -38,12 +43,29 @@ public class RecyclerViewGroupAdapter extends RecyclerView.Adapter<RecyclerViewG
         Log.d(TAG, "onBindViewHolder: called.");
 
         holder.btn_adm_group.setText(mGroup.get(position).getGroupName());
-
+        holder.btn_adm_group.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new FragmentAddNewTask();
+                MainActivity activity = (MainActivity) view.getContext();
+                FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_id, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+                Toast.makeText(mContext, mGroup.get(position).getGroupName(), Toast.LENGTH_SHORT).show();
+            }
+        });
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + mGroup.get(position));
-
+                Fragment fragment = new FragmentAdmin();
+                MainActivity activity = (MainActivity) view.getContext();
+                FragmentManager fragmentManager = activity.getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_id, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 Toast.makeText(mContext, mGroup.get(position).getGroupName(), Toast.LENGTH_SHORT).show();
             }
         });

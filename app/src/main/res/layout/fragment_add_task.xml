@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/lightBlue"
 
-    tools:context=".AddNewGroup">
+    tools:context=".FragmentAddNewTask">
 
 
     <TextView

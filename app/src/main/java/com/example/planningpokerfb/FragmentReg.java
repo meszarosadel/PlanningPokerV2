@@ -1,6 +1,5 @@
 package com.example.planningpokerfb;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +66,20 @@ public class FragmentReg extends Fragment {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(!task.isSuccessful()){
                                 Toast.makeText(getActivity(),"SignUp Unsuccessful, Please Try Again",Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "SignUp Successful!", Toast.LENGTH_SHORT).show();
+                                Fragment fragment = new FragmentUser();
+                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.frame_id, fragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                            }
+                            if(task.isSuccessful()){
+                                //Toast.makeText(getActivity(),"Successful SignUp",Toast.LENGTH_SHORT).show();
+                                databaseRole= FirebaseDatabase.getInstance().getReference("UserRoles");
+                                String userRole = "USER";
+                                addUserRole(email,userRole);
                             }
                             if(task.isSuccessful()){
                                 //Toast.makeText(getActivity(),"Successful SignUp",Toast.LENGTH_SHORT).show();

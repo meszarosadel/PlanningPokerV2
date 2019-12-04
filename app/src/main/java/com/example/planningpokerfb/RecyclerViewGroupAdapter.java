@@ -1,6 +1,7 @@
 package com.example.planningpokerfb.Models;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.planningpokerfb.FragmentAddNewTask;
-import com.example.planningpokerfb.FragmentAdmin;
 import com.example.planningpokerfb.MainActivity;
 import com.example.planningpokerfb.R;
 
@@ -47,19 +47,9 @@ public class RecyclerViewGroupAdapter extends RecyclerView.Adapter<RecyclerViewG
             @Override
             public void onClick(View view) {
                 Fragment fragment = new FragmentAddNewTask();
-                MainActivity activity = (MainActivity) view.getContext();
-                FragmentManager fragmentManager = activity.getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_id, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                Toast.makeText(mContext, mGroup.get(position).getGroupName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new FragmentAdmin();
+                Bundle args = new Bundle();
+                args.putString("groupId", mGroup.get(position).getGroupId());
+                fragment.setArguments(args);
                 MainActivity activity = (MainActivity) view.getContext();
                 FragmentManager fragmentManager = activity.getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

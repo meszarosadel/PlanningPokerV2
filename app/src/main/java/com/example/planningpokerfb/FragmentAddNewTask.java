@@ -22,7 +22,7 @@ public class FragmentAddNewTask extends Fragment {
     EditText et_add_task;
     Button btn_add_task;
     private DatabaseReference mDatabase;
-    
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState, final String groupId) {
 

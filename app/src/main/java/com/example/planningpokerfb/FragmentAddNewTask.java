@@ -25,6 +25,7 @@ public class FragmentAddNewTask extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState, final String groupId) {
+        String taskName = "";
 
         View view = inflater.inflate(R.layout.fragment_add_group, container, false);
 

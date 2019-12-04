@@ -88,10 +88,26 @@ public class FragmentLogin extends Fragment {
                                 userRole.id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                 databaseReference= FirebaseDatabase.getInstance().getReference();
                                 userRoleDatabaseReference = databaseReference.child("UserRoles").child(userRole.id);
-                                userRoleDatabaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                userRoleDatabaseReference.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                         userRole = dataSnapshot.getValue(UserRole.class);
+                                        if(userRole.role.equals("ADMIN")  ){
+                                            Fragment fragment = new FragmentAdmin();
+                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            fragmentTransaction.replace(R.id.frame_id, fragment);
+                                            fragmentTransaction.addToBackStack(null);
+                                            fragmentTransaction.commit();
+                                        }
+                                        else if(userRole.role.equals("USER"))  {
+                                            Fragment fragment = new FragmentUser();
+                                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            fragmentTransaction.replace(R.id.frame_id, fragment);
+                                            fragmentTransaction.addToBackStack(null);
+                                            fragmentTransaction.commit();
+                                        }
                                     }
 
                                     @Override
@@ -99,22 +115,7 @@ public class FragmentLogin extends Fragment {
 
                                     }
                                 });
-                                if(userRole.role == "ADMIN"){
-                                    Fragment fragment = new FragmentUser();
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.frame_id, fragment);
-                                    fragmentTransaction.addToBackStack(null);
-                                    fragmentTransaction.commit();
                                 }
-                                else{
-                                    Fragment fragment = new FragmentUser();
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.frame_id, fragment);
-                                    fragmentTransaction.addToBackStack(null);
-                                    fragmentTransaction.commit();
-                            }}
                         }
                     });
                 }

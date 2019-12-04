@@ -81,6 +81,12 @@ public class FragmentReg extends Fragment {
                                 String userRole = "USER";
                                 addUserRole(email,userRole);
                             }
+                            if(task.isSuccessful()){
+                                //Toast.makeText(getActivity(),"Successful SignUp",Toast.LENGTH_SHORT).show();
+                                databaseRole= FirebaseDatabase.getInstance().getReference("UserRoles");
+                                String userRole = "USER";
+                                addUserRole(email,userRole);
+                            }
                         }
                     });
 

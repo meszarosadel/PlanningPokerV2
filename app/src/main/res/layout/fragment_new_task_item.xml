@@ -2,21 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/new_task_item"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
 
     <TextView
         android:id="@+id/tv_task"
-        android:layout_width="341dp"
-        android:layout_height="56dp"
+        android:layout_width="166dp"
+        android:layout_height="45dp"
         android:layout_weight="1"
         android:text="TextView" />
 
     <Switch
         android:id="@+id/switch1"
-        android:layout_width="96dp"
-        android:layout_height="76dp"
+        android:layout_width="128dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:textOff="unavailable"
         android:textOn="available" />

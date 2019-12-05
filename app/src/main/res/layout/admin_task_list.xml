@@ -23,8 +23,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_task_admin"
-        android:layout_width="263dp"
-        android:layout_height="365dp"
+        android:layout_width="262dp"
+        android:layout_height="330dp"
         android:background="@color/sky_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

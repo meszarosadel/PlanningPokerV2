@@ -26,15 +26,11 @@ public class FragmentAddNewTask extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_task, container, false);
-        String gId = getArguments().getString("groupId");
-                             Bundle savedInstanceState, final String groupId) {
-        String taskName = "";
+        final String groupId = getArguments().getString("groupId");
 
-        View view = inflater.inflate(R.layout.fragment_add_group, container, false);
-
-        tv_add_task = view.findViewById(R.id.tv_add_grop);
-        et_add_task = view.findViewById(R.id.et_add_group);
-        btn_add_task = view.findViewById(R.id.btn_add_group);
+        tv_add_task = view.findViewById(R.id.tv_add_task);
+        et_add_task = view.findViewById(R.id.et_add_task);
+        btn_add_task = view.findViewById(R.id.btn_add_task);
 
         btn_add_task.setOnClickListener(new View.OnClickListener() {
             @Override

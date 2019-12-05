@@ -9,9 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.planningpokerfb.Adapters.RecyclerViewGroupAdapterUser;
 import com.example.planningpokerfb.DatabaseHelper.FirebaseDatabaseHelper;
 import com.example.planningpokerfb.Models.Groups;
-import com.example.planningpokerfb.Models.RecyclerViewGroupAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,7 +50,7 @@ public class FragmentUser extends Fragment {
                     Groups product = productSnapshot.getValue(Groups.class);
                     gNames.add(product);
                 }
-                RecyclerViewGroupAdapter mAdapter = new RecyclerViewGroupAdapter(getActivity(), gNames);
+                RecyclerViewGroupAdapterUser mAdapter = new RecyclerViewGroupAdapterUser(getActivity(), gNames);
                 recyclerView.setAdapter(mAdapter);
             }
 

@@ -10,18 +10,15 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.planningpokerfb.FragmentAdminTaskList;
+import com.example.planningpokerfb.FragmentUserTasks;
 import com.example.planningpokerfb.MainActivity;
 import com.example.planningpokerfb.Models.Groups;
-import com.example.planningpokerfb.Models.RecyclerViewGroupAdapter;
 import com.example.planningpokerfb.R;
-import com.example.planningpokerfb.RecyclerViewUserVoteTasks;
 
 import java.util.ArrayList;
 
@@ -51,7 +48,7 @@ public class RecyclerViewGroupAdapterUser extends RecyclerView.Adapter<RecyclerV
         holder.btn_adm_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new RecyclerViewUserVoteTasks();
+                Fragment fragment = new FragmentUserTasks();
                 Bundle args = new Bundle();
                 args.putString("groupId", mGroup.get(position).getGroupId());
                 args.putString("groupName", mGroup.get(position).getGroupName());

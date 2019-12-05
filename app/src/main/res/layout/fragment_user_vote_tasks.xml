@@ -2,10 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vote_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lightBlue"
-    tools:context=".user_vote_tasks">
+    android:orientation="vertical"
+    tools:context=".RecyclerViewUserVoteTasks">
 
 
     <TextView
@@ -22,9 +24,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="302dp"
-        android:layout_height="408dp"
+        android:id="@+id/rv_task_user"
+        android:layout_width="295dp"
+        android:layout_height="276dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="43dp"
         android:layout_marginEnd="55dp"
@@ -33,19 +35,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.028" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="165dp"
         android:layout_marginTop="27dp"
         android:layout_marginEnd="165dp"
-        android:text="Submit"
         android:background="@drawable/round_btn"
+        android:text="Submit"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_task_user" />
 </androidx.constraintlayout.widget.ConstraintLayout>

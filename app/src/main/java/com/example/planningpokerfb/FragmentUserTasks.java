@@ -23,39 +23,33 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class FragmentAdminTaskList extends Fragment {
+public class FragmentUserTasks extends Fragment {
+
     RecyclerView recyclerView;
-    Button btn_add_new_task;
+    Button btn_submit;
     FirebaseDatabaseHelper myDb;
-    String gId, gName;
+    String tId, tName;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.admin_task_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_vote_tasks, container, false);
+        tId = getArguments().getString("groupId");
+        tName = getArguments().getString("groupName");
 
-        Bundle bundle = getArguments();
-        if(bundle !=null){
-            gId = getArguments().getString("groupId");
-            gName = getArguments().getString("groupName");
-        }
-
-
-
-        btn_add_new_task = view.findViewById(R.id.btn_add_new_task);
+        btn_submit = view.findViewById(R.id.btn_submit);
         myDb = new FirebaseDatabaseHelper();
 
-        recyclerView = view.findViewById(R.id.rv_task_admin);
+        recyclerView = view.findViewById(R.id.rv_task_user);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
 
-        btn_add_new_task.setOnClickListener(new View.OnClickListener() {
+        btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new FragmentAddNewTask();
+                Fragment fragment = new FragmentUser();
                 Bundle args = new Bundle();
-                args.putString("groupId", gId);
-                args.putString("groupName", gName);
+                args.putString("groupId", tId);
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -79,10 +73,7 @@ public class FragmentAdminTaskList extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot productSnapshot: dataSnapshot.getChildren()) {
                     Tasks task = productSnapshot.getValue(Tasks.class);
-//                    if (gId.equals(task.getGroupId())){
-//                        tNames.add(task);
-//                    }
-                    if (task.getGroupId().equals(gId)){
+                    if (tId.equals(task.getGroupId())){
                         tNames.add(task);
                     }
                 }
@@ -96,5 +87,4 @@ public class FragmentAdminTaskList extends Fragment {
             }
         });
     }
-
 }

@@ -39,7 +39,6 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
     public void onBindViewHolder(RecyclerViewTaskAdapter.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        holder.groupText.setText(mTask.get(position).getGroupId());
         holder.taskText.setText(mTask.get(position).getQuestion());
         holder.sw.setChecked(mTask.get(position).isActive());
 
@@ -69,7 +68,6 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
         public ViewHolder(View itemView) {
             super(itemView);
             parentLayout = itemView.findViewById(R.id.new_task_item);
-            groupText = itemView.findViewById(R.id.tv_group_name);
             taskText = itemView.findViewById(R.id.tv_task);
             sw = itemView.findViewById(R.id.switch1);
         }

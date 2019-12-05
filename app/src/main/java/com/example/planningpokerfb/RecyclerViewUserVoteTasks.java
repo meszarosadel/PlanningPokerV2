@@ -1,5 +1,8 @@
 package com.example.planningpokerfb;
 
+import androidx.fragment.app.Fragment;
+
+public class RecyclerViewUserVoteTasks extends Fragment {
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;

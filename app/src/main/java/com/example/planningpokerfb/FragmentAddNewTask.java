@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.planningpokerfb.Models.Tasks;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +45,12 @@ public class FragmentAddNewTask extends Fragment {
                     mDatabase = FirebaseDatabase.getInstance().getReference();
                     Tasks task = new Tasks(UUID.randomUUID().toString(),groupId,taskName,false);
                     mDatabase.child("Tasks").child(task.getQuestionId()).setValue(task);
+                    Fragment fragment = new FragmentAdminTaskList();
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.frame_id, fragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
                 }
             }
         });

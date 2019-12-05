@@ -47,5 +47,6 @@ public class Tasks {
         this.activeFrom = activeFrom;
         this.activeUntil = activeUntil;
     }
+    public Tasks(){}
 
 }

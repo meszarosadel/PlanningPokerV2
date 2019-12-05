@@ -49,7 +49,6 @@ public class RecyclerViewGroupAdapter extends RecyclerView.Adapter<RecyclerViewG
                 Fragment fragment = new FragmentAdminTaskList();
                 Bundle args = new Bundle();
                 args.putString("groupId", mGroup.get(position).getGroupId());
-                args.putString("groupName", mGroup.get(position).getGroupName());
                 fragment.setArguments(args);
                 MainActivity activity = (MainActivity) view.getContext();
                 FragmentManager fragmentManager = activity.getSupportFragmentManager();

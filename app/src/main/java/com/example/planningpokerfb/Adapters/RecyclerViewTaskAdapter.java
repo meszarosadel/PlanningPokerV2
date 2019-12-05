@@ -5,20 +5,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.planningpokerfb.Models.RecyclerViewGroupAdapter;
 import com.example.planningpokerfb.Models.Tasks;
 import com.example.planningpokerfb.R;
-import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
-public class RecyclerViewTaskAdapter {
+public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTaskAdapter.ViewHolder> {
 
     private static final String TAG = "RecyclerViewAdapter";
 
@@ -37,11 +36,13 @@ public class RecyclerViewTaskAdapter {
         return holder;
     }
 
-
     public void onBindViewHolder(RecyclerViewTaskAdapter.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
 
-        holder.btn_add_task.setText(mTask.get(position).getQuestion());
+        holder.groupText.setText(mTask.get(position).getGroupId());
+        holder.taskText.setText(mTask.get(position).getQuestion());
+        holder.sw.setChecked(mTask.get(position).isActive());
+
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +61,17 @@ public class RecyclerViewTaskAdapter {
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        Button btn_add_task;
         LinearLayout parentLayout;
+
+        TextView groupText, taskText;
+        Switch sw;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            btn_add_task = itemView.findViewById(R.id.btn_add_task);
-            parentLayout = itemView.findViewById(R.id.admin_group_item);
+            parentLayout = itemView.findViewById(R.id.new_task_item);
+            groupText = itemView.findViewById(R.id.tv_group_name);
+            taskText = itemView.findViewById(R.id.tv_task);
+            sw = itemView.findViewById(R.id.switch1);
         }
     }
 }

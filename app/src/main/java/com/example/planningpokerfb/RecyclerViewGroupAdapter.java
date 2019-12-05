@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.planningpokerfb.FragmentAddNewTask;
+import com.example.planningpokerfb.FragmentAdminTaskList;
 import com.example.planningpokerfb.MainActivity;
 import com.example.planningpokerfb.R;
 
@@ -46,9 +46,10 @@ public class RecyclerViewGroupAdapter extends RecyclerView.Adapter<RecyclerViewG
         holder.btn_adm_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new FragmentAddNewTask();
+                Fragment fragment = new FragmentAdminTaskList();
                 Bundle args = new Bundle();
                 args.putString("groupId", mGroup.get(position).getGroupId());
+                args.putString("groupName", mGroup.get(position).getGroupName());
                 fragment.setArguments(args);
                 MainActivity activity = (MainActivity) view.getContext();
                 FragmentManager fragmentManager = activity.getSupportFragmentManager();

@@ -1,10 +1,6 @@
 package com.example.planningpokerfb;
 
-import androidx.fragment.app.Fragment;
-
-public class RecyclerViewUserVoteTasks extends Fragment {
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +11,20 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.planningpokerfb.Models.Tasks;
+import com.example.planningpokerfb.Models.Votes;
 
 import java.util.ArrayList;
 
 
 public class RecyclerViewUserVoteTasks extends RecyclerView.Adapter<RecyclerViewUserVoteTasks.ViewHolder> {
 
-    private static final String TAG = "RecyclerViewAdapter";
+    private static final String TAG = "RecyclerViewUserVoteTasks";
 
-    private ArrayList<Tasks> mTask;
+    private ArrayList<Votes> mVote;
     private Context mContext;
 
-    public RecyclerViewUserVoteTasks(Context context, ArrayList<Tasks> task ) {
-        mTask = task;
+    public RecyclerViewUserVoteTasks(Context context, ArrayList<Votes> vote ) {
+        mVote = vote;
         mContext = context;
     }
 
@@ -39,22 +35,20 @@ public class RecyclerViewUserVoteTasks extends RecyclerView.Adapter<RecyclerView
     }
 
     public void onBindViewHolder(RecyclerViewUserVoteTasks.ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
 
-        holder.tv_task_user.setText(mTask.get(position).getQuestion());
+        holder.tv_task_user.setText(mVote.get(position).getAnswer());
 
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on: " + mTask.get(position));
 
-                Toast.makeText(mContext, mTask.get(position).getQuestion(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, mVote.get(position).getAnswer(), Toast.LENGTH_SHORT).show();
             }
         });
     }
     public int getItemCount() {
-        return mTask.size();
+        return mVote.size();
     }
 
 
@@ -62,7 +56,7 @@ public class RecyclerViewUserVoteTasks extends RecyclerView.Adapter<RecyclerView
 
         LinearLayout parentLayout;
 
-        TextView  tv_task_user;
+        TextView tv_task_user;
         NumberPicker numberPicker;
 
         public ViewHolder(View itemView) {

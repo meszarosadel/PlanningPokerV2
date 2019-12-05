@@ -1,4 +1,4 @@
-package com.example.planningpokerfb.Models;
+package com.example.planningpokerfb.Adapters;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -17,16 +18,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.planningpokerfb.FragmentAdminTaskList;
 import com.example.planningpokerfb.MainActivity;
+import com.example.planningpokerfb.Models.Groups;
+import com.example.planningpokerfb.Models.RecyclerViewGroupAdapter;
 import com.example.planningpokerfb.R;
+import com.example.planningpokerfb.RecyclerViewUserVoteTasks;
 
 import java.util.ArrayList;
 
-public class RecyclerViewGroupAdapter extends RecyclerView.Adapter<RecyclerViewGroupAdapter.ViewHolder> {
+public class RecyclerViewGroupAdapterUser extends RecyclerView.Adapter<RecyclerViewGroupAdapterUser.ViewHolder>{
     private static final String TAG = "RecyclerViewAdapter";
     private ArrayList<Groups> mGroup;
     private Context mContext;
 
-    public RecyclerViewGroupAdapter(Context context, ArrayList<Groups> Group ) {
+    public RecyclerViewGroupAdapterUser(Context context, ArrayList<Groups> Group ) {
         mGroup = Group;
         mContext = context;
     }
@@ -34,19 +38,20 @@ public class RecyclerViewGroupAdapter extends RecyclerView.Adapter<RecyclerViewG
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.admin_exising_group_item, parent, false);
-        ViewHolder holder = new ViewHolder(view);
+        RecyclerViewGroupAdapterUser.ViewHolder holder = new RecyclerViewGroupAdapterUser.ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder( ViewHolder holder, final int position) {
+
         Log.d(TAG, "onBindViewHolder: called.");
 
         holder.btn_adm_group.setText(mGroup.get(position).getGroupName());
         holder.btn_adm_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new FragmentAdminTaskList();
+                Fragment fragment = new RecyclerViewUserVoteTasks();
                 Bundle args = new Bundle();
                 args.putString("groupId", mGroup.get(position).getGroupId());
                 args.putString("groupName", mGroup.get(position).getGroupName());
@@ -78,5 +83,4 @@ public class RecyclerViewGroupAdapter extends RecyclerView.Adapter<RecyclerViewG
             btn_adm_group = itemView.findViewById(R.id.btn_adm_group);
             parentLayout = itemView.findViewById(R.id.admin_group_item);
         }
-    }
-}
+    }}

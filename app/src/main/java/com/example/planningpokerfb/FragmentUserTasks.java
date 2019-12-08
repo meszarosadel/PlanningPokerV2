@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.planningpokerfb.DatabaseHelper.FirebaseDatabaseHelper;
 import com.example.planningpokerfb.Models.Tasks;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,6 +30,7 @@ public class FragmentUserTasks extends Fragment {
     Button btn_submit;
     FirebaseDatabaseHelper myDb;
     String tId, tName;
+    ArrayList<Tasks> groupTasks = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +49,17 @@ public class FragmentUserTasks extends Fragment {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    String id = user.getUid();
+                    for (Tasks task: groupTasks){
+                        //adding votes
+                        //Votes vote = new Votes(UUID.randomUUID().toString(),task.getQuestionId(),user.getUid())
+                    }
+                } else {
+                    // No user is signed in
+                }
 
                 Fragment fragment = new FragmentUser();
                 Bundle args = new Bundle();
@@ -76,7 +90,9 @@ public class FragmentUserTasks extends Fragment {
                     Tasks task = productSnapshot.getValue(Tasks.class);
                     if (tId.equals(task.getGroupId())){
                         tNames.add(task);
+                        groupTasks.add(task);
                     }
+
                 }
                 RecyclerViewUserVoteTasksAdapter mAdapter = new RecyclerViewUserVoteTasksAdapter(getActivity(), tNames);
                 recyclerView.setAdapter(mAdapter);

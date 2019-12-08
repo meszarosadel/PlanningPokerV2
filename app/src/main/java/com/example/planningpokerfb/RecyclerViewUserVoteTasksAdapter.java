@@ -65,8 +65,10 @@ public class RecyclerViewUserVoteTasksAdapter extends RecyclerView.Adapter<Recyc
 
             NumberPicker numberPicker = itemView.findViewById(R.id.numberPicker);
             if (numberPicker != null) {
+                String[] numbers = new String[] {"1", "3", "5", "8", "13", "21", "34", "55", "89"};
+                numberPicker.setDisplayedValues(numbers);
                 numberPicker.setMinValue(0);
-                numberPicker.setMaxValue(50);
+                numberPicker.setMaxValue(numbers.length-1);
                 numberPicker.setWrapSelectorWheel(true);
                 numberPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
                     @Override

@@ -7,16 +7,17 @@
 
     <TextView
         android:id="@+id/tv_task_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="154dp"
+        android:layout_height="70dp"
         android:layout_weight="1"
-        android:text="TextView" />
-
+        android:text="TextView"
+        android:layout_marginBottom="0dp" />
 
     <NumberPicker
         android:id="@+id/numberPicker"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_height="70dp"
+        android:layout_weight="1"
+        android:layout_marginBottom="0dp"/>
 
 </LinearLayout>

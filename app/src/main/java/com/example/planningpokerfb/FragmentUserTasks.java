@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.planningpokerfb.Adapters.RecyclerViewTaskAdapter;
 import com.example.planningpokerfb.DatabaseHelper.FirebaseDatabaseHelper;
 import com.example.planningpokerfb.Models.Tasks;
 import com.google.firebase.database.DataSnapshot;
@@ -47,9 +46,11 @@ public class FragmentUserTasks extends Fragment {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Fragment fragment = new FragmentUser();
                 Bundle args = new Bundle();
                 args.putString("groupId", tId);
+                args.putString("groupName", tName);
                 fragment.setArguments(args);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -77,7 +78,7 @@ public class FragmentUserTasks extends Fragment {
                         tNames.add(task);
                     }
                 }
-                RecyclerViewTaskAdapter mAdapter = new RecyclerViewTaskAdapter(getActivity(), tNames);
+                RecyclerViewUserVoteTasksAdapter mAdapter = new RecyclerViewUserVoteTasksAdapter(getActivity(), tNames);
                 recyclerView.setAdapter(mAdapter);
             }
 

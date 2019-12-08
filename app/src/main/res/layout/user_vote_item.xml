@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/user_task_vote"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/user_task_vote">
+    android:layout_height="match_parent">
 
 
     <TextView
         android:id="@+id/tv_task_user"
-        android:layout_width="154dp"
-        android:layout_height="70dp"
+        android:layout_width="157dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="0dp"
         android:layout_weight="1"
-        android:text="TextView"
-        android:layout_marginBottom="0dp" />
+        android:text="TextView" />
 
     <NumberPicker
         android:id="@+id/numberPicker"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_weight="1"
-        android:layout_marginBottom="0dp"/>
+        android:layout_width="103dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_vote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:text="Vote"
+        android:textColor="@color/white"
+        android:layout_weight="1" />
+
 
 </LinearLayout>

@@ -32,6 +32,12 @@ public class Tasks {
         return active;
     }
 
+    public void setActive(){
+        this.active = true;
+    }
+
+    public void setInactive(){this.active = false;}
+
     public Tasks(String questionId, String groupId, String question, boolean active){
         this.questionId = questionId;
         this.groupId = groupId;

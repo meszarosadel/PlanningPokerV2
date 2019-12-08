@@ -1,6 +1,7 @@
 package com.example.planningpokerfb;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class FragmentAdminTaskList extends Fragment {
     Button btn_add_new_task;
     FirebaseDatabaseHelper myDb;
     String gId, gName;
+    private static  final String TAG = FragmentAdminTaskList.class.getSimpleName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,8 +40,6 @@ public class FragmentAdminTaskList extends Fragment {
             gId = getArguments().getString("groupId");
             gName = getArguments().getString("groupName");
         }
-
-
 
         btn_add_new_task = view.findViewById(R.id.btn_add_new_task);
         myDb = new FirebaseDatabaseHelper();
@@ -74,18 +74,16 @@ public class FragmentAdminTaskList extends Fragment {
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
-            ArrayList<Tasks> tNames = new ArrayList<>();
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                ArrayList<Tasks> tNames = new ArrayList<>();
                 for (DataSnapshot productSnapshot: dataSnapshot.getChildren()) {
                     Tasks task = productSnapshot.getValue(Tasks.class);
-//                    if (gId.equals(task.getGroupId())){
-//                        tNames.add(task);
-//                    }
                     if (task.getGroupId().equals(gId)){
                         tNames.add(task);
                     }
                 }
+                Log.d(TAG, "adding task to list: "+ tNames.size());
                 RecyclerViewTaskAdapter mAdapter = new RecyclerViewTaskAdapter(getActivity(), tNames);
                 recyclerView.setAdapter(mAdapter);
             }
@@ -96,5 +94,4 @@ public class FragmentAdminTaskList extends Fragment {
             }
         });
     }
-
 }

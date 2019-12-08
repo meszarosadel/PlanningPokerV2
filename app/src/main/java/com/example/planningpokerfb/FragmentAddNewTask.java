@@ -46,6 +46,9 @@ public class FragmentAddNewTask extends Fragment {
                     Tasks task = new Tasks(UUID.randomUUID().toString(),groupId,taskName,false);
                     mDatabase.child("Tasks").child(task.getQuestionId()).setValue(task);
                     Fragment fragment = new FragmentAdminTaskList();
+                    Bundle args = new Bundle();
+                    args.putString("groupId", groupId);
+                    fragment.setArguments(args);
                     FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.frame_id, fragment);

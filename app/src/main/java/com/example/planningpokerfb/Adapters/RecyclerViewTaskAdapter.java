@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.planningpokerfb.Models.Tasks;
 import com.example.planningpokerfb.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -23,6 +26,10 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
 
     private ArrayList<Tasks> mTask;
     private Context mContext;
+
+
+    private DatabaseReference mDatabase;
+    private DatabaseReference ref;
 
     public RecyclerViewTaskAdapter(Context context, ArrayList<Tasks> task ) {
         mTask = task;
@@ -38,9 +45,23 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
 
     public void onBindViewHolder(RecyclerViewTaskAdapter.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
-
         holder.taskText.setText(mTask.get(position).getQuestion());
         holder.sw.setChecked(mTask.get(position).isActive());
+        holder.sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                mTask.get(position).setActive();
+                mDatabase = FirebaseDatabase.getInstance().getReference("Tasks");
+                mDatabase.child(mTask.get(position).getQuestionId()).setValue(mTask.get(position));
+                }
+                if(!isChecked){
+                    mTask.get(position).setInactive();
+                    mDatabase = FirebaseDatabase.getInstance().getReference("Tasks");
+                    mDatabase.child(mTask.get(position).getQuestionId()).setValue(mTask.get(position));
+                }
+            }
+        });
 
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +83,7 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
 
         LinearLayout parentLayout;
 
-        TextView groupText, taskText;
+        TextView  taskText;
         Switch sw;
 
         public ViewHolder(View itemView) {

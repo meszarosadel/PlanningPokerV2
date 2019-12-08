@@ -12,6 +12,7 @@ public class Votes {
         this.userId = userId;
         this.answer = answer;
     }
+    public Votes(){}
 
     public String getVoteId() {
         return voteId;

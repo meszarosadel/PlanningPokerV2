@@ -25,8 +25,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_task_user"
-        android:layout_width="295dp"
-        android:layout_height="276dp"
+        android:layout_width="314dp"
+        android:layout_height="360dp"
         android:layout_marginStart="55dp"
         android:layout_marginTop="43dp"
         android:layout_marginEnd="55dp"
@@ -43,12 +43,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="165dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="92dp"
         android:layout_marginEnd="165dp"
         android:background="@drawable/round_btn"
         android:text="Results"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_task_user" />
 </androidx.constraintlayout.widget.ConstraintLayout>

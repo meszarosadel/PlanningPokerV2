@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +21,6 @@ import java.util.ArrayList;
 
 
 public class FragmentResultsAdapter extends RecyclerView.Adapter<FragmentResultsAdapter.ViewHolder> {
-
-    private static final String TAG = "RecyclerViewUserVoteTasksAdapter";
 
     private ArrayList<Tasks> mVote;
     private Context mContext;
@@ -43,7 +40,7 @@ public class FragmentResultsAdapter extends RecyclerView.Adapter<FragmentResults
 
         holder.tv_task_res.setText(mVote.get(position).getQuestion());
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("Tasks");
+        DatabaseReference ref = database.getReference("Votes");
 
 // Attach a listener to read the data at our posts reference
         ref.addValueEventListener(new ValueEventListener() {
@@ -56,24 +53,19 @@ public class FragmentResultsAdapter extends RecyclerView.Adapter<FragmentResults
                                                   votes.add(vote);
                                               }
                                           }
-                                          float avg = 0;
-                                          for (Votes vote: votes){
-                                              avg += (Integer.parseInt(vote.getAnswer()));
+                                          float avg = 0f;
+                                          if (votes.size() > 0){
+                                            for (Votes vote: votes){
+                                                avg += (Float.parseFloat(vote.getAnswer()));
+                                            }
+                                            avg = avg/ votes.size();
                                           }
-                                          avg = avg/ votes.size();
                                           holder.tv_score_res.setText(Float.toString(avg));
                                       }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
                                   });
-        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Toast.makeText(mContext, mVote.get(position).getQuestion(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
     }

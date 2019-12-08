@@ -14,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.planningpokerfb.DatabaseHelper.FirebaseDatabaseHelper;
 import com.example.planningpokerfb.Models.Tasks;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,18 +48,7 @@ public class FragmentUserTasks extends Fragment {
             @Override
             public void onClick(View v) {
 
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-                    String id = user.getUid();
-                    for (Tasks task: groupTasks){
-                        //adding votes
-                        //Votes vote = new Votes(UUID.randomUUID().toString(),task.getQuestionId(),user.getUid())
-                    }
-                } else {
-                    // No user is signed in
-                }
-
-                Fragment fragment = new FragmentUser();
+                Fragment fragment = new FragmentResult();
                 Bundle args = new Bundle();
                 args.putString("groupId", tId);
                 args.putString("groupName", tName);

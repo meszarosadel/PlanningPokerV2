@@ -50,9 +50,16 @@ public class RecyclerViewTaskAdapter extends RecyclerView.Adapter<RecyclerViewTa
         holder.sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
                 mTask.get(position).setActive();
                 mDatabase = FirebaseDatabase.getInstance().getReference("Tasks");
                 mDatabase.child(mTask.get(position).getQuestionId()).setValue(mTask.get(position));
+                }
+                if(!isChecked){
+                    mTask.get(position).setInactive();
+                    mDatabase = FirebaseDatabase.getInstance().getReference("Tasks");
+                    mDatabase.child(mTask.get(position).getQuestionId()).setValue(mTask.get(position));
+                }
             }
         });
 
